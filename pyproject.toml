@@ -1,0 +1,17 @@
+[project]
+name = "email-consolidator"
+version = "0.1.0"
+description = "Gather, normalize, dedupe, import and verify email archives into one private IMAP server."
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+emailc = "emailc.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["emailc"]

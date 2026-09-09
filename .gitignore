@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+work/
+*.pw
+*.secret
+secrets/
+config.toml
+*.tsv.gz
+.DS_Store

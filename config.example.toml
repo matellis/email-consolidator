@@ -1,0 +1,39 @@
+# Copy to config.toml and edit. config.toml is gitignored.
+# All paths absolute. The work directory holds logs, state and quarantine.
+
+[paths]
+# Where your raw email lives today. Read-only inputs. Several allowed.
+sources = [
+  "/Volumes/OldBackup/Users/me/Library/Mail",
+  "/mnt/nas/archives/outlook",
+]
+# Stage 2 gathers originals here. Never modified after that.
+archive = "/mnt/nas/mail-archive"
+# Stage 3 writes maildir derivatives here. Regenerable.
+normalized = "/mnt/nas/mail-normalized"
+# Logs, resume state, dedupe quarantine, reports.
+work = "/mnt/nas/mail-work"
+
+[server]
+host = "mail.example.internal"
+port = 993
+tls = true
+user = "archive@example.internal"
+# A file containing only the password, chmod 600. Never put it here.
+password_file = "~/.secrets/archive.pw"
+# Top-level folder every import goes under.
+prefix = "Archive"
+# "login" for most servers, "plain" for SASL PLAIN.
+auth = "login"
+
+[gmail]
+user = "you@gmail.com"
+password_file = "~/.secrets/gmail-app.pw"
+# Found automatically by the \All flag; this is the fallback name.
+folder = "[Gmail]/All Mail"
+
+[dedupe]
+# Keeper preference: path prefixes inside the normalized tree, best first.
+# When a message exists in several sources, the copy under the first
+# matching prefix is kept. Usually your newest, most complete backup.
+prefer = ["applemail/2024-laptop", "applemail/2019-imac"]

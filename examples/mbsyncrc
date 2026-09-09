@@ -1,0 +1,28 @@
+# One-way pull of Gmail All Mail into a local Maildir with mbsync (isync).
+# Put in ~/.mbsyncrc. Run: mbsync gmail-archive
+# Creates the Maildir if missing. Never pushes changes to Gmail.
+
+IMAPAccount gmail
+Host imap.gmail.com
+Port 993
+User you@gmail.com
+PassCmd "cat ~/.secrets/gmail-app.pw"
+TLSType IMAPS
+PipelineDepth 10
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Path ~/mail-archive/gmail/you@gmail.com/
+Inbox ~/mail-archive/gmail/you@gmail.com/INBOX
+SubFolders Verbatim
+
+Channel gmail-archive
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:"All Mail"
+Create Near
+Expunge None
+Remove None
+Sync Pull
+SyncState *
